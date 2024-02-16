@@ -31,7 +31,11 @@ public class MovieCollection {
         insertionSort(movies);
 
         for (Movie movie : movies) {
-            actorList.addAll(Arrays.asList(movie.getCast()));
+            for (String actor : movie.getCast()) {
+                if (!actorList.contains(actor)) {
+                    actorList.add(actor);
+                }
+            }
         }
         insertionSort(actorList);
 
@@ -77,12 +81,6 @@ public class MovieCollection {
             return;
         }
 
-        int num = 1;
-        for (Movie movie : choices) {
-            System.out.println(num + ". " + movie.getTitle());
-            num++;
-        }
-
         movieLookUp(choices);
     }
 
@@ -108,10 +106,10 @@ public class MovieCollection {
             num++;
         }
 
-        System.out.println("Which person would you like to learn more about? Or type 0 to exit.\nEnter number: ");
+        System.out.print("Which person would you like to learn more about? Or type 0 to exit.\nEnter number: ");
 
         while (!scan.hasNextInt()) {
-            System.out.println("Try again, that isn't a number");
+            System.out.print("Try again, that isn't a number");
             scan.nextLine();
         }
         int choice = scan.nextInt();
@@ -137,7 +135,13 @@ public class MovieCollection {
     }
 
     private void movieLookUp(ArrayList<Movie> choices) {
-        System.out.println("Which movie would you like to learn more about? Or type 0 to exit.\nEnter number: ");
+        int num = 1;
+        for (Movie movie : choices) {
+            System.out.println(num + ". " + movie.getTitle());
+            num++;
+        }
+
+        System.out.print("Which movie would you like to learn more about? Or type 0 to exit.\nEnter number: ");
 
         while (!scan.hasNextInt()) {
             System.out.println("Try again, that isn't a number");
@@ -186,9 +190,6 @@ public class MovieCollection {
             while (idx > 0 && unsorted.get(idx).compareTo(unsorted.get(idx - 1)) < 0) {
                 unsorted.set(idx, unsorted.set(idx - 1, unsorted.get(idx)));
                 idx--;
-            }
-            if (idx > 0 && (unsorted.get(idx).compareTo(unsorted.get(idx + 1)) == 0 || unsorted.get(idx).compareTo(unsorted.get(idx - 1)) == 0)) {
-                unsorted.remove(idx);
             }
         }
     }
