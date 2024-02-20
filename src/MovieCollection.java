@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.AtomicMoveNotSupportedException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class MovieCollection {
@@ -71,7 +69,7 @@ public class MovieCollection {
 
         ArrayList<Movie> choices = new ArrayList<Movie>();
         for (Movie movie : movies) {
-            if (movie.getTitle().contains(menuOption)) {
+            if (movie.getTitle().toLowerCase().contains(menuOption)) {
                 choices.add(movie);
             }
         }
@@ -113,6 +111,7 @@ public class MovieCollection {
             scan.nextLine();
         }
         int choice = scan.nextInt();
+        scan.nextLine();
 
         if (choice == 0) {
             System.out.println("Back to the menu!");
@@ -148,6 +147,7 @@ public class MovieCollection {
             scan.nextLine();
         }
         int choice = scan.nextInt();
+        scan.nextLine();
 
 
         if (choice == 0) {
@@ -164,7 +164,7 @@ public class MovieCollection {
         cast = cast.substring(0, cast.length() - 2);
 
         System.out.println("Title: " + chosenMovie.getTitle() +
-                "\nRuntime: " + chosenMovie.getRuntime() + "minutes" +
+                "\nRuntime: " + chosenMovie.getRuntime() + " minutes" +
                 "\nDirected by: " + chosenMovie.getDirector() +
                 "\nCast: " + cast +
                 "\nOverview: " + chosenMovie.getOverview() +
